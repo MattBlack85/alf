@@ -32,7 +32,8 @@ class Worker:
         Send the actual message to a remote server
         """
         try:
-            async with session.post(self.url, json=msg) as resp:
+            async with session.post(self.url, data=msg,
+                                    headers={'Content-Type': 'application/json'}) as resp:
                 resp = await resp.json()
                 LOGGER.debug('RESPONSE: %s', resp)
         except aiohttp.client_exceptions.ClientConnectorError as exc:

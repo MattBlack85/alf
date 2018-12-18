@@ -1,5 +1,8 @@
 import asyncio
+import logging
 
+
+LOGGER = logging.getLogger('alf.protocol')
 QUEUE = asyncio.Queue()
 
 
@@ -19,4 +22,5 @@ class LogServerProtocol(asyncio.Protocol):
         """
         Put data ino the queue after it's received.
         """
+        LOGGER.debug(f'Received data: {data}')
         QUEUE.put_nowait(data)

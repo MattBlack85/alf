@@ -22,5 +22,8 @@ class LogServerProtocol(asyncio.Protocol):
         """
         Put data ino the queue after it's received.
         """
-        LOGGER.debug(f'Received data: {data}')
-        QUEUE.put_nowait(data)
+        LOGGER.debug(f'Received {len(data)} bytes')
+        data = data.split(b'\r\n')
+        for msg in data:
+            if msg:
+                QUEUE.put_nowait(msg)

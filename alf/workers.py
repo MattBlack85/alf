@@ -23,7 +23,7 @@ class Worker:
         """
         async with aiohttp.ClientSession() as session:
             while True:
-                msg = pickle.loads(await self.queue.get())
+                msg = await self.queue.get()
                 LOGGER.debug('MSG from queue: %s', msg)
                 await self.send_message(session, msg)
 

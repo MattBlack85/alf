@@ -19,5 +19,4 @@ class LogServerProtocol(asyncio.Protocol):
         """
         Put data ino the queue after it's received.
         """
-        log = data[4:]
-        QUEUE.put_nowait(log)
+        QUEUE.put_nowait(data)
